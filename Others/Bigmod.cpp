@@ -1,9 +1,12 @@
 #include<bits/stdc++.h>
-using namespace std;
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
 #define  FIO        ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #define  all(v)     v.begin(),v.end()
 #define  rall(v)    v.rbegin(),v.rend()
 #define  MEM(a,x)   memset(a,x,sizeof(a))
+#define  SZ(v)      v.size()
+#define  bug        cout<<"bug"<<endl;
 #define  pi         acos(-1.0)
 #define  ll     long long
 #define  pb     push_back
@@ -18,7 +21,18 @@ using namespace std;
 #define  EPS    1e-12
 #define  ss     second
 #define  ff     first
+using namespace std;
+using namespace __gnu_pbds;
+
+template<typename T>
+using ordered_set=tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>;
+template<typename T>
+using ordered_multiset=tree<T, null_type, less_equal<T>, rb_tree_tag,tree_order_statistics_node_update>;
+
+void Fileio(){freopen ("output.txt","w",stdout);freopen ("input.txt","r",stdin);}
+inline ll powr(int a,int b){ll res=1;while(b){if(b&1) res*=a;a*=a;b/=2;}return res;}
 int cases=1;
+
 #ifdef ppqq
      #define debug(...) __f(#__VA_ARGS__, __VA_ARGS__)
     template < typename Arg1 >
@@ -34,39 +48,22 @@ int cases=1;
 #else
     #define debug(...)
 #endif
-///******************************************START******************************************
-vii v;
-int dp[100005];
-int rec(int pos)
-{
-    if(dp[pos]!=-1) return dp[pos];
-    int ans=0;
-    for(int i=pos+1;i<v.size();i++)
-    {
 
-        if(v[pos]<v[i])
-        {
-            ans=max(ans,rec(i));
-        }
-    }
-    dp[pos]=ans+1;
-    return dp[pos];
+///******************************************START******************************************
+ll M = 10000007;
+ll bigmod(ll N,ll P)
+{
+	if(P==0) return 1;
+	if(P%2==0)
+	{
+		ll ret=bigmod(N,P/2);
+		return ((ret%M)*(ret%M))%M;
+	}
+	else return ((N%M)*(bigmod(N,P-1)%M))%M;
+
 }
 int main()
 {
-   //freopen ("output.txt","w",stdout);
-   //freopen ("input.txt","r",stdin);
     FIO;
-    MEM(dp,-1);
-    int n;
-    cin>>n;
-    v.resize(n);
-    int lis=0;
-    for(int i=0;i<n;i++) cin>>v[i];
-    for(int i=0;i<v.size();i++)
-    {
-        lis=max(lis,rec(i));
-    }
-    cout<<lis;
+    cout<<bigmod(2,32);
 }
-
