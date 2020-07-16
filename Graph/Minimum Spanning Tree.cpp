@@ -63,7 +63,7 @@ int MST(int n)
         int b=find_set(graph[i].v);
         if(a!=b)
         {
-            par[graph[i].u]=graph[i].v;
+            par[a]=b;
             cnt++;
             sum+=graph[i].w;
         }
