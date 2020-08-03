@@ -2,8 +2,7 @@
 using namespace std;
 
 ///ref : https://www.youtube.com/watch?v=03I46RVWBd8
-
-///complexity : O(q*block_size + total_block*n) or O((q+n)*sqrt(n)))
+///complexity : ///complexity : O(q*block_size + total_block*n) or O((q+n)*sqrt(n))
 
 ///******************************************START******************************************
 int ara[100000],K,sum,ans[100000],q,n;
@@ -35,7 +34,7 @@ void MO()
     {
         while(R<query[i].R) add(++R);
         while(L<query[i].L) remove(L++);
-        while(R>query[i].R) remove(R++);
+        while(R>query[i].R) remove(R--);
         while(L>query[i].L) add(--L);
         ans[query[i].idx]=sum;
     }
